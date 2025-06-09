@@ -7,7 +7,7 @@ use serde_json::{json, Value};
 use uuid::Uuid;
 
 use crate::{
-    handlers::extract_user_id,
+    handlers::{AuthenticatedUser, extract_user_id, convert_auth_error},
     models::{FriendRequest, FriendResponse, SendFriendRequestRequest},
     AppState,
 };
@@ -16,7 +16,7 @@ pub async fn get_friends(
     State(state): State<AppState>,
     request: Request,
 ) -> Result<Json<Vec<FriendResponse>>, (StatusCode, Json<Value>)> {
-    let user_id = extract_user_id(&request)?;
+    let user_id = extract_user_id(&request).map_err(convert_auth_error)?;
 
     match state.services.friend.get_friends(user_id).await {
         Ok(friends) => Ok(Json(friends)),
@@ -29,10 +29,9 @@ pub async fn get_friends(
 
 pub async fn send_friend_request(
     State(state): State<AppState>,
-    request: Request,
+    AuthenticatedUser(user_id): AuthenticatedUser,
     Json(req): Json<SendFriendRequestRequest>,
 ) -> Result<Json<FriendRequest>, (StatusCode, Json<Value>)> {
-    let user_id = extract_user_id(&request)?;
 
     match state.services.friend.send_friend_request(user_id, req).await {
         Ok(friend_request) => Ok(Json(friend_request)),
@@ -48,7 +47,7 @@ pub async fn accept_friend_request(
     Path(request_id): Path<Uuid>,
     request: Request,
 ) -> Result<Json<Value>, (StatusCode, Json<Value>)> {
-    let user_id = extract_user_id(&request)?;
+    let user_id = extract_user_id(&request).map_err(convert_auth_error)?;
 
     match state.services.friend.accept_friend_request(user_id, request_id).await {
         Ok(_) => Ok(Json(json!({ "message": "Friend request accepted" }))),
@@ -64,7 +63,7 @@ pub async fn reject_friend_request(
     Path(request_id): Path<Uuid>,
     request: Request,
 ) -> Result<Json<Value>, (StatusCode, Json<Value>)> {
-    let user_id = extract_user_id(&request)?;
+    let user_id = extract_user_id(&request).map_err(convert_auth_error)?;
 
     match state.services.friend.reject_friend_request(user_id, request_id).await {
         Ok(_) => Ok(Json(json!({ "message": "Friend request rejected" }))),
@@ -80,7 +79,7 @@ pub async fn remove_friend(
     Path(friend_id): Path<Uuid>,
     request: Request,
 ) -> Result<Json<Value>, (StatusCode, Json<Value>)> {
-    let user_id = extract_user_id(&request)?;
+    let user_id = extract_user_id(&request).map_err(convert_auth_error)?;
 
     match state.services.friend.remove_friend(user_id, friend_id).await {
         Ok(_) => Ok(Json(json!({ "message": "Friend removed" }))),

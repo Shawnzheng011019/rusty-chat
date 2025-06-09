@@ -47,3 +47,32 @@ pub fn extract_user_id(request: &Request) -> Result<Uuid, StatusCode> {
         .copied()
         .ok_or(StatusCode::UNAUTHORIZED)
 }
+
+// Helper function to convert StatusCode to the expected error type
+pub fn convert_auth_error(err: StatusCode) -> (StatusCode, axum::Json<serde_json::Value>) {
+    (err, axum::Json(serde_json::json!({ "error": "Unauthorized" })))
+}
+
+// Custom extractor for user ID
+pub struct AuthenticatedUser(pub Uuid);
+
+#[axum::async_trait]
+impl<S> axum::extract::FromRequestParts<S> for AuthenticatedUser
+where
+    S: Send + Sync,
+{
+    type Rejection = (StatusCode, axum::Json<serde_json::Value>);
+
+    async fn from_request_parts(
+        parts: &mut axum::http::request::Parts,
+        _state: &S,
+    ) -> Result<Self, Self::Rejection> {
+        let user_id = parts
+            .extensions
+            .get::<Uuid>()
+            .copied()
+            .ok_or_else(|| convert_auth_error(StatusCode::UNAUTHORIZED))?;
+
+        Ok(AuthenticatedUser(user_id))
+    }
+}

@@ -8,7 +8,7 @@ import {
   XMarkIcon
 } from '@heroicons/react/24/outline';
 import { apiClient } from '../../services/api';
-import { FileUploadResponse, MessageType } from '../../types';
+import type { FileUploadResponse, MessageType } from '../../types';
 
 interface FileUploadProps {
   onFileUploaded: (file: FileUploadResponse, messageType: MessageType) => void;
@@ -30,17 +30,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
 
-  const getFileIcon = (fileType: string) => {
-    if (fileType.startsWith('image/')) {
-      return <PhotoIcon className="w-8 h-8 text-blue-500" />;
-    } else if (fileType.startsWith('video/')) {
-      return <VideoCameraIcon className="w-8 h-8 text-purple-500" />;
-    } else if (fileType.startsWith('audio/')) {
-      return <SpeakerWaveIcon className="w-8 h-8 text-green-500" />;
-    } else {
-      return <DocumentIcon className="w-8 h-8 text-gray-500" />;
-    }
-  };
+
 
   const getMessageType = (fileType: string): MessageType => {
     if (fileType.startsWith('image/')) {

@@ -1,4 +1,4 @@
-import { WebSocketMessage, Message, TypingIndicator } from '../types';
+import type { WebSocketMessage } from '../types';
 
 export type WebSocketEventHandler = (data: any) => void;
 

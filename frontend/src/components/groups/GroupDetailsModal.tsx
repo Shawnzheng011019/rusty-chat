@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { 
-  XMarkIcon, 
-  UserPlusIcon, 
+import {
+  XMarkIcon,
+  UserPlusIcon,
   UserMinusIcon,
-  CrownIcon,
+  StarIcon,
   ShieldCheckIcon
 } from '@heroicons/react/24/outline';
-import { Group, GroupMember, AddMemberRequest } from '../../types';
+import type { Group, GroupMember, AddMemberRequest } from '../../types';
 import { useAuth } from '../../contexts/AuthContext';
 
 interface GroupDetailsModalProps {
@@ -65,7 +65,7 @@ export const GroupDetailsModal: React.FC<GroupDetailsModalProps> = ({
   const getRoleIcon = (role: string) => {
     switch (role) {
       case 'owner':
-        return <CrownIcon className="w-4 h-4 text-yellow-500" />;
+        return <StarIcon className="w-4 h-4 text-yellow-500" />;
       case 'admin':
         return <ShieldCheckIcon className="w-4 h-4 text-blue-500" />;
       default:

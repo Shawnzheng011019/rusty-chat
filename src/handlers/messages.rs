@@ -8,7 +8,7 @@ use serde_json::{json, Value};
 use uuid::Uuid;
 
 use crate::{
-    handlers::extract_user_id,
+    handlers::{extract_user_id, convert_auth_error},
     models::MessageResponse,
     AppState,
 };
@@ -25,7 +25,7 @@ pub async fn get_messages(
     Query(query): Query<MessageQuery>,
     request: Request,
 ) -> Result<Json<Vec<MessageResponse>>, (StatusCode, Json<Value>)> {
-    let _user_id = extract_user_id(&request)?;
+    let _user_id = extract_user_id(&request).map_err(convert_auth_error)?;
     
     let limit = query.limit.unwrap_or(50).min(100);
     let offset = query.offset.unwrap_or(0);

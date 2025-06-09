@@ -8,7 +8,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { useChat } from '../../contexts/ChatContext';
 import { apiClient } from '../../services/api';
-import { MessageType } from '../../types';
+import type { MessageType } from '../../types';
 
 export const MessageInput: React.FC = () => {
   const { currentChat, sendMessage, sendTypingIndicator } = useChat();

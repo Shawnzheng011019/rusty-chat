@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { apiClient } from '../services/api';
 import { wsService } from '../services/websocket';
 
 export const TestPage: React.FC = () => {

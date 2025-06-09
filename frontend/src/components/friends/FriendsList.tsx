@@ -8,7 +8,7 @@ import {
   TrashIcon
 } from '@heroicons/react/24/outline';
 import { apiClient } from '../../services/api';
-import { Friend, User, FriendRequest } from '../../types';
+import type { Friend, User, FriendRequest } from '../../types';
 import { useAuth } from '../../contexts/AuthContext';
 
 export const FriendsList: React.FC = () => {

@@ -106,8 +106,8 @@ async fn health_check() -> impl axum::response::IntoResponse {
 }
 
 async fn websocket_handler(
-    ws: WebSocketUpgrade,
     State(state): State<AppState>,
+    ws: WebSocketUpgrade,
 ) -> Response {
     ws.on_upgrade(|socket| websocket::handle_socket(socket, state))
 }

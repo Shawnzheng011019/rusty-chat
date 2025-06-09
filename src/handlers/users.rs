@@ -7,7 +7,7 @@ use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
 
 use crate::{
-    handlers::extract_user_id,
+    handlers::{extract_user_id, convert_auth_error},
     models::UserResponse,
     AppState,
 };
@@ -22,7 +22,7 @@ pub async fn get_current_user(
     State(state): State<AppState>,
     request: Request,
 ) -> Result<Json<UserResponse>, (StatusCode, Json<Value>)> {
-    let user_id = extract_user_id(&request)?;
+    let user_id = extract_user_id(&request).map_err(convert_auth_error)?;
 
     match state.services.user.get_user_by_id(user_id).await {
         Ok(user) => Ok(Json(user)),

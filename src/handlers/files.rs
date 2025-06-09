@@ -1,25 +1,25 @@
 use axum::{
     body::Bytes,
-    extract::{Multipart, Path, Request, State},
+    extract::{Path, Request, State},
     http::{header, StatusCode},
     response::{IntoResponse, Response},
     Json,
 };
+use axum_extra::extract::Multipart;
 use serde_json::{json, Value};
 use uuid::Uuid;
 
 use crate::{
-    handlers::extract_user_id,
+    handlers::AuthenticatedUser,
     models::FileResponse,
     AppState,
 };
 
 pub async fn upload_file(
     State(state): State<AppState>,
-    request: Request,
+    AuthenticatedUser(user_id): AuthenticatedUser,
     mut multipart: Multipart,
 ) -> Result<Json<FileResponse>, (StatusCode, Json<Value>)> {
-    let user_id = extract_user_id(&request)?;
 
     while let Some(field) = multipart.next_field().await.unwrap() {
         let name = field.name().unwrap_or("").to_string();

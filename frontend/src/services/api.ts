@@ -1,19 +1,22 @@
-import axios, { AxiosInstance, AxiosResponse } from 'axios';
-import { 
-  AuthResponse, 
-  LoginRequest, 
-  RegisterRequest, 
-  User, 
-  Message, 
+import axios from 'axios';
+import type {
+  AxiosInstance,
+  AxiosResponse
+} from 'axios';
+import type {
+  AuthResponse,
+  LoginRequest,
+  RegisterRequest,
+  User,
+  Message,
   SendMessageRequest,
   Friend,
-  FriendRequest,
   Group,
   CreateGroupRequest,
   AddMemberRequest,
   GroupMember,
   FileUploadResponse
-} from '../types';
+} from '../types/index';
 
 class ApiClient {
   private client: AxiosInstance;

@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  UserGroupIcon, 
+import {
+  UserGroupIcon,
   PlusIcon,
   Cog6ToothIcon,
-  UserPlusIcon,
-  UserMinusIcon,
   ChatBubbleLeftIcon
 } from '@heroicons/react/24/outline';
 import { apiClient } from '../../services/api';
-import { Group, GroupMember, CreateGroupRequest, AddMemberRequest } from '../../types';
+import type { Group, GroupMember, CreateGroupRequest, AddMemberRequest } from '../../types';
 import { useAuth } from '../../contexts/AuthContext';
 import { CreateGroupModal } from './CreateGroupModal';
 import { GroupDetailsModal } from './GroupDetailsModal';

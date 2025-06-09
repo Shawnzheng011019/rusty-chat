@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
-import { CreateGroupRequest } from '../../types';
+import type { CreateGroupRequest } from '../../types';
 
 interface CreateGroupModalProps {
   onClose: () => void;

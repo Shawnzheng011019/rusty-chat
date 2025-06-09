@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
-import { Message, Chat, TypingIndicator, SendMessageRequest } from '../types';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import type { ReactNode } from 'react';
+import type { Message, Chat, TypingIndicator, SendMessageRequest } from '../types';
 import { apiClient } from '../services/api';
 import { wsService } from '../services/websocket';
 import { useAuth } from './AuthContext';
@@ -198,7 +199,10 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
           name: friend.user.username,
           type: 'direct' as const,
           avatar_url: friend.user.avatar_url,
-          participants: [friend.user],
+          participants: [{
+            ...friend.user,
+            created_at: new Date().toISOString() // Add missing created_at field
+          }],
           unread_count: 0,
         }));
 

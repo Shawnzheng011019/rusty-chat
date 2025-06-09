@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 import { useAuth } from '../../contexts/AuthContext';
-import { LoginRequest } from '../../types';
+import type { LoginRequest } from '../../types';
 
 interface LoginFormProps {
   onSuccess?: () => void;

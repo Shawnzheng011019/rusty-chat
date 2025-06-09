@@ -1,0 +1,54 @@
+# Rust build artifacts
+/target/
+
+# Cargo lock file (uncomment if you want to ignore it)
+# Cargo.lock
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Temporary files
+*.tmp
+*.temp
+
+# Upload directory (if you want to ignore uploaded files)
+/uploads/*
+!/uploads/.gitkeep
+
+# Build outputs
+dist/
+build/
+
+# Backup files
+*.bak
+*.backup
+
+# Coverage reports
+coverage/
+*.profraw

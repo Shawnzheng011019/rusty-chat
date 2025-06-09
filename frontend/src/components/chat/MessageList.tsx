@@ -121,26 +121,26 @@ export const MessageList: React.FC = () => {
           {/* Messages for this date */}
           <div className="space-y-2">
             {dateMessages.map((message, index) => {
-              const isOwn = message.sender_id === user?.id;
+              const isOwn = message.sender.id === user?.id;
               const prevMessage = index > 0 ? dateMessages[index - 1] : null;
               const nextMessage = index < dateMessages.length - 1 ? dateMessages[index + 1] : null;
-              
+
               const showAvatar = !isOwn && (
-                !nextMessage || 
-                nextMessage.sender_id !== message.sender_id ||
+                !nextMessage ||
+                nextMessage.sender.id !== message.sender.id ||
                 new Date(nextMessage.created_at).getTime() - new Date(message.created_at).getTime() > 300000 // 5 minutes
               );
-              
+
               const showSender = !isOwn && (
-                !prevMessage || 
-                prevMessage.sender_id !== message.sender_id ||
+                !prevMessage ||
+                prevMessage.sender.id !== message.sender.id ||
                 new Date(message.created_at).getTime() - new Date(prevMessage.created_at).getTime() > 300000 // 5 minutes
               );
-              
-              const isConsecutive = prevMessage && 
-                prevMessage.sender_id === message.sender_id &&
+
+              const isConsecutive = prevMessage &&
+                prevMessage.sender.id === message.sender.id &&
                 new Date(message.created_at).getTime() - new Date(prevMessage.created_at).getTime() < 300000; // 5 minutes
-              
+
               return (
                 <MessageBubble
                   key={message.id}
@@ -148,7 +148,7 @@ export const MessageList: React.FC = () => {
                   isOwn={isOwn}
                   showAvatar={showAvatar}
                   showSender={showSender}
-                  isConsecutive={isConsecutive}
+                  isConsecutive={!!isConsecutive}
                 />
               );
             })}

@@ -6,7 +6,7 @@ import {
   SpeakerWaveIcon,
   MicrophoneIcon
 } from '@heroicons/react/24/outline';
-import { Message, MessageType } from '../../types';
+import type { Message, MessageType } from '../../types';
 
 interface MessageBubbleProps {
   message: Message;

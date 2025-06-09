@@ -8,7 +8,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { useAuth } from '../../contexts/AuthContext';
 import { useChat } from '../../contexts/ChatContext';
-import { Chat } from '../../types';
+import type { Chat } from '../../types';
 import { FriendsList } from '../friends/FriendsList';
 import { GroupsList } from '../groups/GroupsList';
 
