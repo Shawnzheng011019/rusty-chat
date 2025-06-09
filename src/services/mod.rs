@@ -9,7 +9,6 @@ pub mod websocket;
 use crate::{config::Config, database::Database};
 use anyhow::Result;
 use redis::Client as RedisClient;
-use std::sync::Arc;
 
 #[derive(Clone)]
 pub struct AppServices {

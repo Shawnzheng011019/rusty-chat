@@ -1,6 +1,6 @@
 use crate::{
     database::Database,
-    models::{Message, MessageResponse, MessageSender, MessageFile, SendMessageRequest},
+    models::{MessageResponse, MessageSender, MessageFile, SendMessageRequest},
 };
 use anyhow::Result;
 use sqlx::Row;

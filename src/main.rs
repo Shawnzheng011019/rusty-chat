@@ -1,12 +1,10 @@
 use axum::{
     extract::{ws::WebSocketUpgrade, State},
-    http::StatusCode,
     middleware,
     response::Response,
     routing::{get, post},
     Router,
 };
-use std::sync::Arc;
 use tower_http::{cors::CorsLayer, services::ServeDir};
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 

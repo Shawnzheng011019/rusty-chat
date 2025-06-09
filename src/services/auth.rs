@@ -1,6 +1,6 @@
 use crate::{
     database::Database,
-    models::{AuthResponse, LoginRequest, RefreshTokenRequest, RegisterRequest, User, UserResponse},
+    models::{AuthResponse, LoginRequest, RefreshTokenRequest, RegisterRequest, User},
 };
 use anyhow::{anyhow, Result};
 use bcrypt::{hash, verify, DEFAULT_COST};

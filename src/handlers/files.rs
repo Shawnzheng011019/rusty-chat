@@ -1,6 +1,5 @@
 use axum::{
-    body::Bytes,
-    extract::{Path, Request, State},
+    extract::{Path, State},
     http::{header, StatusCode},
     response::{IntoResponse, Response},
     Json,
