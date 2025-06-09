@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   MagnifyingGlassIcon,
   UserPlusIcon,
@@ -13,6 +14,7 @@ import { FriendsList } from '../friends/FriendsList';
 import { GroupsList } from '../groups/GroupsList';
 
 export const ChatSidebar: React.FC = () => {
+  const navigate = useNavigate();
   const { user, logout } = useAuth();
   const { chats, currentChat, setCurrentChat } = useChat();
   const [searchQuery, setSearchQuery] = useState('');
@@ -56,6 +58,7 @@ export const ChatSidebar: React.FC = () => {
           
           <div className="flex items-center space-x-2">
             <button
+              onClick={() => navigate('/settings')}
               className="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100"
               title="Settings"
             >
